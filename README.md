@@ -16,7 +16,7 @@ import ezio
 data = ezio.json.load(file_path)
 ```
 
-You may pass additional keyword arguments to the underlying IO methods, but the basic design goal is to make IO as easy as possible in simplest and most-common case. For 99% of use cases, users should not need to worry about encodings or file open `mode` options.
+Users should not need to worry about encodings or file open `mode` options for 99% of use cases. However, you may pass additional keyword arguments to the underlying IO methods.
 
 ## Examples
 
