@@ -1,0 +1,29 @@
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*' # Trigger on pushes to tags starting with 'v' (e.g., v1.0.0)
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.2' # Replace '3.x' with your desired Python version
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build twine
+
+      - name: Build package
+        run: python -m build
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          verbose: true

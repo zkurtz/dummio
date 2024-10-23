@@ -1,0 +1,15 @@
+# Virtual environments
+venv/
+.venv/
+
+# cache
+__pycache__/
+.pytest_cache/
+
+# Build artifacts
+dist/
+build/
+
+# IDE-specific files
+.idea/
+.vscode/
