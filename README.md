@@ -43,6 +43,10 @@ dummio.yaml.save(data)
 assert data == dummio.yaml.load(path)
 ```
 
+## Installation
+
+We're [on pypi](https://pypi.org/project/dummio/) so you can just `pip install dummio` or `poetry add dummio` etc.
+
 ## Development
 
 Install poetry:
