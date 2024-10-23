@@ -1,8 +1,8 @@
 # ezio
 
-A lightweight collection of standardized wrappers for IO of common file types, including text, yaml, and json.
+Standardized wrappers for IO of various file types. The goal is to make IO as easy as possible by implementing the most common and recommendable default options. Of course users may pass additional keyword arguments to the underlying IO methods.
 
-`ezio` replaces entire blocks of code like 
+`ezio` replaces entire blocks of code like
 ```
 import json
 
@@ -16,7 +16,12 @@ import ezio
 data = ezio.json.load(file_path)
 ```
 
-Users should not need to worry about encodings or file open `mode` options for 99% of use cases. However, you may pass additional keyword arguments to the underlying IO methods.
+So far we support:
+- text
+- json
+- yaml
+
+Note that `yaml` is not a required dependency; you may install `ezio` and use it for `json` without bothering with `yaml` installation. Any other IO modules to be added will similarly be optional.
 
 ## Examples
 
