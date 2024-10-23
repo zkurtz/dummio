@@ -62,7 +62,7 @@ pyenv activate ezio
 
 Install this package and its dependencies in your virtual env:
 ```
-poetry install --with io_modules --with dev
+poetry install --with extras --with dev
 ```
 
 Set up git hooks:
