@@ -1,10 +1,10 @@
 """Main tests of ezio."""
 
-import ezio
 from pathlib import Path
-from typing import Any
 from types import ModuleType
-from functools import partial
+from typing import Any
+
+import ezio
 
 
 def dictionary() -> dict[str, int]:
@@ -27,14 +27,26 @@ def _assert_cycle(*, data: Any, path: Path, module: ModuleType) -> None:
 
 def test_json(tmp_path: Path) -> None:
     """Test the packio package."""
-    _assert_cycle(path=tmp_path / "data.json", data=dictionary(), module=ezio.json,)
+    _assert_cycle(
+        path=tmp_path / "data.json",
+        data=dictionary(),
+        module=ezio.json,
+    )
 
 
 def test_text(tmp_path: Path) -> None:
     """Test the packio package."""
-    _assert_cycle(path=tmp_path / "data.json", data="Hello world!", module=ezio.text,)
+    _assert_cycle(
+        path=tmp_path / "data.json",
+        data="Hello world!",
+        module=ezio.text,
+    )
 
 
 def test_yaml(tmp_path: Path) -> None:
     """Test the packio package."""
-    _assert_cycle(path=tmp_path / "data.json", data=dictionary(), module=ezio.yaml,)
+    _assert_cycle(
+        path=tmp_path / "data.json",
+        data=dictionary(),
+        module=ezio.yaml,
+    )

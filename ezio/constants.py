@@ -3,7 +3,6 @@
 from pathlib import Path
 from typing import Any
 
-
 type PathType = str | Path
 type AnyDict = dict[Any, Any]
 

@@ -1,9 +1,15 @@
 """IO for text."""
 
-from ezio.constants import AnyDict, PathType, DEFAULT_WRITE_MODE, DEFAULT_ENCODING
+from ezio.constants import DEFAULT_ENCODING, DEFAULT_WRITE_MODE, PathType
 
 
-def save(data: str, *, filepath: PathType, encoding: str = DEFAULT_ENCODING, mode: str = DEFAULT_WRITE_MODE,) -> None:
+def save(
+    data: str,
+    *,
+    filepath: PathType,
+    encoding: str = DEFAULT_ENCODING,
+    mode: str = DEFAULT_WRITE_MODE,
+) -> None:
     """Save text."""
     with open(filepath, mode, encoding=encoding) as file:
         file.write(data)
