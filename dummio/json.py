@@ -1,8 +1,8 @@
-"""IO for yaml."""
+"""IO for json."""
 
-import yaml
+import json
 
-from ezio.constants import DEFAULT_ENCODING, DEFAULT_WRITE_MODE, AnyDict, PathType
+from dummio.constants import DEFAULT_ENCODING, DEFAULT_WRITE_MODE, AnyDict, PathType
 
 
 def save(
@@ -12,12 +12,12 @@ def save(
     encoding: str = DEFAULT_ENCODING,
     mode: str = DEFAULT_WRITE_MODE,
 ) -> None:
-    """Save a yaml file."""
+    """Save a json file."""
     with open(filepath, mode, encoding=encoding) as file:
-        yaml.dump(data, file)
+        json.dump(data, file)
 
 
 def load(filepath: PathType, encoding: str = DEFAULT_ENCODING) -> AnyDict:
-    """Read a yaml file."""
+    """Read a json file."""
     with open(filepath, "r", encoding=encoding) as file:
-        return yaml.load(file, Loader=yaml.FullLoader)
+        return json.load(file)

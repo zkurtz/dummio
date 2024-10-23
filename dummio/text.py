@@ -1,6 +1,6 @@
 """IO for text."""
 
-from ezio.constants import DEFAULT_ENCODING, DEFAULT_WRITE_MODE, PathType
+from dummio.constants import DEFAULT_ENCODING, DEFAULT_WRITE_MODE, PathType
 
 
 def save(

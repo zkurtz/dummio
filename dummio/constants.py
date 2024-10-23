@@ -1,4 +1,4 @@
-"""Constants for ezio."""
+"""Constants for dummio."""
 
 from pathlib import Path
 from typing import Any

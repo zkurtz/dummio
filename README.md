@@ -1,8 +1,8 @@
-# ezio
+# dummio
 
 Standardized wrappers for IO of various file types. The goal is to make IO as easy as possible by implementing the most common and recommendable default options. Of course users may pass additional keyword arguments to the underlying IO methods.
 
-`ezio` replaces entire blocks of code like
+`dummio` replaces entire blocks of code like
 ```
 import json
 
@@ -11,9 +11,9 @@ with open(file_path, 'r', encoding='utf-8') as file:
 ```
 with simply
 ```
-import ezio
+import dummio
 
-data = ezio.json.load(file_path)
+data = dummio.json.load(file_path)
 ```
 
 So far we support:
@@ -21,28 +21,28 @@ So far we support:
 - json
 - yaml
 
-Note that `yaml` is not a required dependency; you may install `ezio` and use it for `json` without bothering with `yaml` installation. Any other IO modules to be added will similarly be optional.
+Note that `yaml` is not a required dependency; you may install `dummio` and use it for `json` without bothering with `yaml` installation. Any other IO modules to be added will similarly be optional.
 
 ## Examples
 
 ```
-import ezio
+import dummio
 
 text = "hello world"
 data = {"key": text}
 path = "io_example_file"
 
 # Text
-ezio.text.save(text, path=path)
-assert text == ezio.text.load(path)
+dummio.text.save(text, path=path)
+assert text == dummio.text.load(path)
 
 # JSON
-ezio.json.save(data)
-assert data == ezio.json.load(path)
+dummio.json.save(data)
+assert data == dummio.json.load(path)
 
 # YAML
-ezio.yaml.save(data)
-assert data == ezio.yaml.load(path)
+dummio.yaml.save(data)
+assert data == dummio.yaml.load(path)
 ```
 
 ## Development
@@ -56,8 +56,8 @@ Install [pyenv and its virtualenv plugin](https://github.com/pyenv/pyenv-virtual
 ```
 pyenv install 3.12.2
 pyenv global 3.12.2
-pyenv virtualenv 3.12.2 ezio
-pyenv activate ezio
+pyenv virtualenv 3.12.2 dummio
+pyenv activate dummio
 ```
 
 Install this package and its dependencies in your virtual env:

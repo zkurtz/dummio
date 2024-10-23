@@ -1,10 +1,10 @@
-"""Main tests of ezio."""
+"""Main tests of dummio."""
 
 from pathlib import Path
 from types import ModuleType
 from typing import Any
 
-import ezio
+import dummio
 
 
 def dictionary() -> dict[str, int]:
@@ -30,7 +30,7 @@ def test_json(tmp_path: Path) -> None:
     _assert_cycle(
         path=tmp_path / "data.json",
         data=dictionary(),
-        module=ezio.json,
+        module=dummio.json,
     )
 
 
@@ -39,7 +39,7 @@ def test_text(tmp_path: Path) -> None:
     _assert_cycle(
         path=tmp_path / "data.json",
         data="Hello world!",
-        module=ezio.text,
+        module=dummio.text,
     )
 
 
@@ -48,5 +48,5 @@ def test_yaml(tmp_path: Path) -> None:
     _assert_cycle(
         path=tmp_path / "data.json",
         data=dictionary(),
-        module=ezio.yaml,
+        module=dummio.yaml,
     )
