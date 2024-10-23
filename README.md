@@ -1,15 +1,13 @@
 # dummio
 
-Standardized wrappers for IO of various file types. The goal is to make IO as easy as possible by implementing the most common and recommendable default options. Of course users may pass additional keyword arguments to the underlying IO methods.
-
-`dummio` replaces entire blocks of code like
+IO for dummies! We make IO as easy as possible by implementing the most common and recommendable default options. (Users may pass additional keyword arguments to the underlying IO methods.) For example, instead of
 ```
 import json
 
 with open(file_path, 'r', encoding='utf-8') as file:
     data = json.load(file)
 ```
-with simply
+you can simply
 ```
 import dummio
 
