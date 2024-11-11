@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dummio"
-version = "0.0.1"
+version = "0.0.2"
 description = "Easiest-possible IO for basic file types."
 authors = ["Zach Kurtz <zkurtz@gmail.com>"]
 readme = "README.md"
