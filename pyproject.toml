@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dummio"
-version = "0.0.2"
+version = "0.0.3"
 description = "Easiest-possible IO for basic file types."
 authors = ["Zach Kurtz <zkurtz@gmail.com>"]
 readme = "README.md"
@@ -21,7 +21,6 @@ ruff = "^0.6.3"
 pyright = "^1.1.378"
 pytest = "^8.3.2"
 pre-commit = "^3.8.0"
-black = "^24.8.0"
 build = "^1.2.1"
 twine = "^5.1.1"
 
@@ -40,6 +39,3 @@ include = ["dummio"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-
-[tool.black]
-line-length = 120

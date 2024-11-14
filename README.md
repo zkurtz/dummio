@@ -49,25 +49,24 @@ We're [on pypi](https://pypi.org/project/dummio/) so you can just `pip install d
 
 ## Development
 
-Install poetry:
+1. Install poetry: `curl -sSL https://install.python-poetry.org | python3 -`
+1. Install [pyenv and its virtualenv plugin](https://github.com/pyenv/pyenv-virtualenv).
+1. Create a dev ops virtual environment:
 ```
-curl -sSL https://install.python-poetry.org | python3 -
-```
+PYTHON_VERSION=3.12.2
+function makenv {
+    # clean up any existing env
+    source deactivate
+    pyenv uninstall --force $1
 
-Install [pyenv and its virtualenv plugin](https://github.com/pyenv/pyenv-virtualenv). Then:
-```
-pyenv install 3.12.2
-pyenv global 3.12.2
-pyenv virtualenv 3.12.2 dummio
-pyenv activate dummio
-```
-
-Install this package and its dependencies in your virtual env:
-```
-poetry install --with extras --with dev
-```
-
-Set up git hooks:
-```
-pre-commit install
+    # build new venv
+    pyenv install $PYTHON_VERSION --skip-existing
+    pyenv global $PYTHON_VERSION
+    pyenv virtualenv $PYTHON_VERSION $1
+    pyenv activate $1
+    poetry install --with extras --with dev
+    pre-commit install
+    poetry lock --no-update
+}
+makenv dummio
 ```
