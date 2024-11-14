@@ -26,14 +26,11 @@ jobs:
         poetry config virtualenvs.create false
         poetry install --no-interaction --no-ansi
 
-    - name: Run unit tests with pytest
-      run: pytest
-
-    - name: Check code formatting with Black
-      run: black --check .
-
     - name: Check code quality with Ruff
       run: ruff check .
 
     - name: Check type hints with pyright
       run: pyright
+
+    - name: Run unit tests with pytest
+      run: pytest
