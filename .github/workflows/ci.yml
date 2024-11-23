@@ -10,15 +10,25 @@ jobs:
   build:
     name: continuous-integration
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.12']
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Overwrite .python-version
+      run: echo ${{ matrix.python-version }} > .python-version
+
     - name: Set up uv
       run: pip install uv
 
     - name: Check code quality with Ruff
-      run: uv run ruff check .
+      run: |
+        uv run ruff check
+        uv run ruff format --check
 
     - name: Check type hints with pyright
       run: uv run pyright

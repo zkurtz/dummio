@@ -1,10 +1,10 @@
 """Constants for dummio."""
 
 from pathlib import Path
-from typing import Any
+from typing import Any, TypeAlias
 
-type PathType = str | Path
-type AnyDict = dict[Any, Any]
+PathType: TypeAlias = str | Path
+AnyDict: TypeAlias = dict[Any, Any]
 
 DEFAULT_ENCODING = "utf-8"
 DEFAULT_WRITE_MODE = "w"
