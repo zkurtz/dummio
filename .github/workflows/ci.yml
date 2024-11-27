@@ -26,6 +26,9 @@ jobs:
         with:
           version: "0.5.4"
 
+      - name: Install extras
+        run: uv sync --group extras
+
       - name: Linting check
         run: uv run ruff check
 
