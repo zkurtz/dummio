@@ -53,7 +53,7 @@ We're [on pypi](https://pypi.org/project/dummio/), so `pip install dummio`.
 git clone git@github.com:zkurtz/dummio.git
 cd dummio
 pip install uv
-uv sync
+uv sync --group extras
 source .venv/bin/activate
 pre-commit install
 ```

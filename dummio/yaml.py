@@ -1,6 +1,9 @@
 """IO for yaml."""
 
-import yaml
+try:
+    import yaml
+except ImportError:
+    raise ImportError("Please install pyyaml to use dummio.yaml")
 
 from dummio.constants import DEFAULT_ENCODING, DEFAULT_WRITE_MODE, AnyDict, PathType
 

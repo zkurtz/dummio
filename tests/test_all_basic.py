@@ -1,4 +1,4 @@
-"""Main tests of dummio."""
+"""Test IO methods for basic data types."""
 
 from pathlib import Path
 from types import ModuleType
