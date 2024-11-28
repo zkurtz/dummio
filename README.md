@@ -28,6 +28,7 @@ So far we support:
 - pandas dataframes:
     - csv
     - parquet
+- onnx.ModelProto instances
 
 ## Dependencies
 
