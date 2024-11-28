@@ -1,5 +1,3 @@
-"""Test IO methods for tabulare data types."""
-
 from pathlib import Path
 from types import ModuleType
 
