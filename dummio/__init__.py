@@ -5,7 +5,6 @@ __version__ = version("dummio")
 
 from dummio import json as json
 from dummio import text as text
-from dummio.constants import ModuleProtocol as ModuleProtocol
 
 try:
     from dummio import yaml as yaml
