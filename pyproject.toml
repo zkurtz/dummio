@@ -1,6 +1,6 @@
 [project]
 name = "dummio"
-version = "1.1.0"
+version = "1.2.0"
 description = "Easiest-possible IO for basic file types."
 authors = [{ name = "Zach Kurtz", email = "zkurtz@gmail.com" }]
 readme = "README.md"
@@ -20,6 +20,7 @@ extras = [
   "pandas>=1.5.0",
   "pyyaml>=6.0.2",
   "onnx>=1.10.1",
+  "pydantic>=2.10.2",
 ]
 
 [project.urls]

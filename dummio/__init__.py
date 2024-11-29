@@ -17,3 +17,9 @@ try:
 except ImportError:
     # this would require the optional dependency onnx
     pass
+
+try:
+    from dummio import pydantic as pydantic
+except ImportError:
+    # this would require the optional dependency pydantic
+    pass

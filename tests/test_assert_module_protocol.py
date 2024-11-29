@@ -8,6 +8,7 @@ from dummio.constants import PathType
 IO_MODULES = [
     "dummio.json",
     "dummio.onnx",
+    "dummio.pydantic",
     "dummio.text",
     "dummio.yaml",
     "dummio.pandas.df_csv",
