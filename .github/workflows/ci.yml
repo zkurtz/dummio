@@ -15,28 +15,26 @@ jobs:
           - '3.13'
 
     steps:
-      - name: Clone repo
-        uses: actions/checkout@v4
+    - name: Clone repo
+      uses: actions/checkout@v4
 
-      - name: Set the python version
-        run: echo "UV_PYTHON=${{ matrix.python-version }}" >> $GITHUB_ENV
+    - name: Install uv and set the python version
+      uses: astral-sh/setup-uv@v4
+      with:
+        version: "0.5.4"
+        python-version: ${{ matrix.python-version }}
 
-      - name: Setup uv
-        uses: astral-sh/setup-uv@v3
-        with:
-          version: "0.5.4"
+    - name: Install extras
+      run: uv sync --group extras
 
-      - name: Install extras
-        run: uv sync --group extras
+    - name: Linting check
+      run: uv run ruff check
 
-      - name: Linting check
-        run: uv run ruff check
+    - name: Formatting check
+      run: uv run ruff format --check
 
-      - name: Formatting check
-        run: uv run ruff format --check
+    - name: Type checking
+      run: uv run pyright
 
-      - name: Type checking
-        run: uv run pyright
-
-      - name: Unit tests
-        run: uv run pytest
+    - name: Unit tests
+      run: uv run pytest
