@@ -1,9 +1,10 @@
 """Assert that every IO module implements save and load in a consistent way."""
 
 import importlib
-from typing import Callable, get_type_hints
 
-from dummio.constants import PathType
+import pytest
+
+from dummio.protocol import assert_module_protocol
 
 IO_MODULES = [
     "dummio.json",
@@ -16,30 +17,8 @@ IO_MODULES = [
 ]
 
 
-def test_assert_module_protocol() -> None:
-    for module_name in IO_MODULES:
-        module = importlib.import_module(module_name)
-        assert hasattr(module, "save")
-        assert hasattr(module, "load")
-
-        # make the following assertions about the save attribute:
-        # - it is a function
-        # - the first argument is named "data"
-        # - all subsequent arguments are keyword-only
-        # - the second argument is "filepath" of type dummio.constants.PathType
-        assert isinstance(module.save, Callable)
-        signature = get_type_hints(module.save)
-        first_two_args = list(signature.keys())[:2]
-        assert first_two_args == ["data", "filepath"]
-        assert signature["filepath"] == PathType
-
-        # make the following assertions about the load attribute:
-        # - it is a function
-        # - the first argument is named "filepath", of type dummio.constants.PathType
-        # - the return type is the same as the "data" argument of the save function
-        assert isinstance(module.load, Callable)
-        signature = get_type_hints(module.load)
-        first_arg = list(signature.keys())[0]
-        assert first_arg == "filepath"
-        assert signature["filepath"] == PathType
-        assert signature["return"] == get_type_hints(module.save)["data"]
+# decorate the test function with pytest.mark.parametrize
+@pytest.mark.parametrize("module_path", IO_MODULES)
+def test_assert_module_protocol(module_path: str) -> None:
+    module = importlib.import_module(module_path)
+    assert_module_protocol(module)
