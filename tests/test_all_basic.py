@@ -50,3 +50,21 @@ def test_yaml(tmp_path: Path) -> None:
         data=dictionary(),
         module=dummio.yaml,
     )
+
+
+def test_pickle(tmp_path: Path) -> None:
+    """Test the packio package."""
+    _assert_cycle(
+        path=tmp_path / "data.pkl",
+        data=dictionary(),
+        module=dummio.pickle,
+    )
+
+
+def test_dill(tmp_path: Path) -> None:
+    """Test the packio package."""
+    _assert_cycle(
+        path=tmp_path / "data.pkl",
+        data=dictionary(),
+        module=dummio.dill,
+    )
