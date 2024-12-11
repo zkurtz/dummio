@@ -7,8 +7,10 @@ import pytest
 from dummio.protocol import assert_module_protocol
 
 IO_MODULES = [
+    "dummio.dill",
     "dummio.json",
     "dummio.onnx",
+    "dummio.pickle",
     "dummio.pydantic",
     "dummio.text",
     "dummio.yaml",
