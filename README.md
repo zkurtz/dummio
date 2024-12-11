@@ -21,7 +21,7 @@ In some coding applications it is desirable to pass an IO module as an argument 
 ## Supported object and file types
 
 So far we support:
-- text
+- text, pickle, and dill
 - simple dictionaries:
     - json
     - yaml
@@ -30,6 +30,8 @@ So far we support:
     - parquet
 - onnx.ModelProto instances
 - pydantic models (relying on the built-in json serialization methods)
+
+Filepaths passed to `save` and `load` methods can be of type `str`, `pathlib.Path`, or `universal_pathlib.UPath` such that many of these methods will "just work" against cloud paths like `UPath("s3://bucket/key")`, `UPath("gs://bucket/key")`, or `UPath("az://container/key")`.
 
 ## Dependencies
 
