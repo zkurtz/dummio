@@ -23,7 +23,7 @@ def save(
     filepath: PathType,
     **kwargs: Any,
 ) -> None:
-    """Save a yaml file.
+    """Save a parquet file.
 
     Args:
         data: Data to save.
@@ -35,7 +35,7 @@ def save(
 
 
 def load(filepath: PathType, **kwargs: Any) -> pd.DataFrame:
-    """Read a yaml file.
+    """Read a parquet file.
 
     Args:
         filepath: Path to read the data.
