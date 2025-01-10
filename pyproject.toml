@@ -1,6 +1,6 @@
 [project]
 name = "dummio"
-version = "1.5.1"
+version = "1.5.2"
 description = "Easiest-possible IO for basic file types."
 authors = [{ name = "Zach Kurtz", email = "zkurtz@gmail.com" }]
 readme = "README.md"
@@ -28,6 +28,7 @@ extras = [
   "dill>=0.2.2",
   "click>=8.1.8",
   "gcsfs>=2024.12.0",
+  "pyarrow>=18.1.0",
 ]
 
 [tool.uv]

@@ -21,8 +21,9 @@ def _assert_cycle(*, data: pd.DataFrame, path: Path, module: ModuleType) -> None
 def test_df_io(tmp_path: Path) -> None:
     """Test the packio package for IO for tabular data."""
     modules = [
-        pd_io.df_parquet,
         pd_io.df_csv,
+        pd_io.df_feather,
+        pd_io.df_parquet,
     ]
     for module in modules:
         _assert_cycle(
