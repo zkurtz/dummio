@@ -61,13 +61,4 @@ assert data == dummio.yaml.load(path)
 
 We're [on pypi](https://pypi.org/project/dummio/), so `pip install dummio`.
 
-## Development
-
-```
-git clone git@github.com:zkurtz/dummio.git
-cd dummio
-pip install uv
-uv sync --group extras
-source .venv/bin/activate
-pre-commit install
-```
+If working directly on this repo, consider using the [simplest-possible virtual environment](https://gist.github.com/zkurtz/4c61572b03e667a7596a607706463543).
