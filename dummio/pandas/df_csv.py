@@ -3,8 +3,10 @@
 from typing import Any
 
 import pandas as pd
+from pandahandler.indexes import is_unnamed_range_index
 
 from dummio.constants import PathType
+from dummio.pandas.utils import add_storage_options
 
 
 def save(
@@ -20,8 +22,9 @@ def save(
         filepath: Path to save the data.
         **kwargs: Additional keyword arguments for pandas.DataFrame.to_csv
     """
-    if "index" not in kwargs and not data.index.name:
+    if "index" not in kwargs and is_unnamed_range_index(data.index):
         kwargs["index"] = False
+    add_storage_options(filepath=filepath, kwargs=kwargs)
     data.to_csv(filepath, **kwargs)
 
 
@@ -32,4 +35,5 @@ def load(filepath: PathType, **kwargs: Any) -> pd.DataFrame:
         filepath: Path to read the data.
         **kwargs: Additional keyword arguments for pandas.read_csv
     """
+    add_storage_options(filepath=filepath, kwargs=kwargs)
     return pd.read_csv(filepath, **kwargs)
