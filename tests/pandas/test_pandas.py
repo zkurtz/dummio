@@ -2,7 +2,6 @@ from pathlib import Path
 from types import ModuleType
 
 import pandas as pd
-from upath import UPath
 
 from dummio import pandas as pd_io
 
@@ -31,20 +30,3 @@ def test_df_io(tmp_path: Path) -> None:
             path=tmp_path / "data",
             module=module,
         )
-
-
-def test_add_storage_options() -> None:
-    """Test the add_storage_options function."""
-    kwargs = {}
-    path = UPath("s3://bucket/data.parquet")
-    pd_io.df_parquet.add_storage_options(filepath=path, kwargs=kwargs)
-    assert pd_io.df_parquet.STORAGE_OPTIONS in kwargs
-
-    kwargs = {}
-    path = UPath("data.parquet")
-    pd_io.df_parquet.add_storage_options(filepath=path, kwargs=kwargs)
-    assert pd_io.df_parquet.STORAGE_OPTIONS in kwargs
-
-    kwargs = {}
-    pd_io.df_parquet.add_storage_options(filepath=Path("data.parquet"), kwargs=kwargs)
-    assert pd_io.df_parquet.STORAGE_OPTIONS not in kwargs

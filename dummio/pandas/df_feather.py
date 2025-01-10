@@ -5,6 +5,7 @@ from typing import Any
 import pandas as pd
 
 from dummio.constants import PathType
+from dummio.pandas.utils import add_storage_options
 
 
 def save(
@@ -20,6 +21,7 @@ def save(
         filepath: Path to save the data.
         **kwargs: Additional keyword arguments for pandas.DataFrame.to_feather
     """
+    add_storage_options(filepath=filepath, kwargs=kwargs)
     data.to_feather(filepath, **kwargs)
 
 
@@ -30,4 +32,5 @@ def load(filepath: PathType, **kwargs: Any) -> pd.DataFrame:
         filepath: Path to read the data.
         **kwargs: Additional keyword arguments for pandas.read_feather
     """
+    add_storage_options(filepath=filepath, kwargs=kwargs)
     return pd.read_feather(filepath, **kwargs)
