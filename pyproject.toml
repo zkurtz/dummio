@@ -1,9 +1,10 @@
 [project]
 name = "dummio"
-version = "1.5.0"
+version = "1.5.1"
 description = "Easiest-possible IO for basic file types."
 authors = [{ name = "Zach Kurtz", email = "zkurtz@gmail.com" }]
 readme = "README.md"
+Source = "https://github.com/zkurtz/dummio"
 requires-python = ">=3.10"
 dependencies = [
     "universal-pathlib>=0.2.5",
@@ -25,13 +26,22 @@ extras = [
   "onnx>=1.10.1",
   "pydantic>=2.10.2",
   "dill>=0.2.2",
+  "click>=8.1.8",
+  "gcsfs>=2024.12.0",
 ]
-
-[project.urls]
-Source = "https://github.com/zkurtz/dummio"
 
 [tool.uv]
 package = true
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.sdist]
+include = ["dummio"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["dummio"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests",]
