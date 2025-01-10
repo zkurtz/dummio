@@ -19,7 +19,7 @@ import click
 import pandas as pd
 from upath import UPath
 
-from dummio.pandas import df_csv, df_parquet
+from dummio.pandas import df_csv, df_feather, df_parquet
 
 
 @click.command()
@@ -34,17 +34,23 @@ def example(path: str) -> None:
     base_path = UPath(path)
     df = pd.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6]})
 
+    # csv:
+    csv_path = base_path / "data.csv"
+    print(f"Doing IO of df against {csv_path}")
+    df_csv.save(data=df, filepath=csv_path)
+    assert df_csv.load(filepath=csv_path).equals(df)
+
     # parquet:
     parquet_path = base_path / "data.parquet"
     print(f"Doing IO of df against {parquet_path}")
     df_parquet.save(data=df, filepath=parquet_path)
     assert df_parquet.load(filepath=parquet_path).equals(df)
 
-    # csv:
-    csv_path = base_path / "data.csv"
-    print(f"Doing IO of df against {csv_path}")
-    df_csv.save(data=df, filepath=csv_path)
-    assert df_csv.load(filepath=csv_path).equals(df)
+    # feather:
+    feather_path = base_path / "data.feather"
+    print(f"Doing IO of df against {feather_path}")
+    df_feather.save(data=df, filepath=feather_path)
+    assert df_feather.load(filepath=feather_path).equals(df)
 
 
 if __name__ == "__main__":

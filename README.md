@@ -27,6 +27,7 @@ So far we support:
     - yaml
 - pandas dataframes:
     - csv
+    - feather
     - parquet
 - onnx.ModelProto instances
 - pydantic models (relying on the built-in json serialization methods)
