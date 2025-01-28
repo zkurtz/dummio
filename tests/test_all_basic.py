@@ -4,6 +4,8 @@ from pathlib import Path
 from types import ModuleType
 from typing import Any
 
+from upath import UPath
+
 import dummio
 
 
@@ -18,10 +20,16 @@ def _assert_cycle(*, data: Any, path: Path, module: ModuleType) -> None:
     loaded_data = module.load(path)
     assert data == loaded_data
 
-    # The same cycle should work in case path is specified as a str instead of a pathlib.Path
+    # The same cycle should work in case path is specified as a str
     str_path = str(path)
     module.save(data, filepath=str_path)
     loaded_data = module.load(str_path)
+    assert data == loaded_data
+
+    # The same cycle should work in case path is specified as a UPath
+    upath_ = UPath(path)
+    module.save(data, filepath=upath_)
+    loaded_data = module.load(upath_)
     assert data == loaded_data
 
 
