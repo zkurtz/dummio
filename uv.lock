@@ -580,7 +580,7 @@ wheels = [
 
 [[package]]
 name = "dummio"
-version = "1.5.4"
+version = "1.6.0"
 source = { editable = "." }
 dependencies = [
     { name = "universal-pathlib" },
