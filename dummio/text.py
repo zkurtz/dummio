@@ -1,8 +1,10 @@
 """IO for text."""
 
+from typing import Literal
+
 from upath import UPath
 
-from dummio.constants import DEFAULT_ENCODING, PathType
+from dummio.constants import DEFAULT_ENCODING, DEFAULT_WRITE_MODE, PathType
 
 
 def save(
@@ -10,10 +12,12 @@ def save(
     *,
     filepath: PathType,
     encoding: str = DEFAULT_ENCODING,
+    mode: Literal["r", "w", "a"] = DEFAULT_WRITE_MODE,
 ) -> None:
     """Save text."""
     path = UPath(filepath)
-    path.write_text(data, encoding=encoding)
+    with path.open(mode=mode, encoding=encoding) as file:
+        file.write(data)
 
 
 def load(filepath: PathType, encoding: str = DEFAULT_ENCODING) -> str:

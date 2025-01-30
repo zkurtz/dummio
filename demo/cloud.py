@@ -85,6 +85,12 @@ def _text(directory: UPath) -> None:
     assert dummio.text.load(filepath=text_path) == text
     text_path.unlink()
 
+    print("Dummio also supports append mode (while native pathlib write_text does not).")
+    dummio.text.save(text, filepath=text_path)
+    dummio.text.save(text, filepath=text_path, mode="a")
+    loaded_text = dummio.text.load(text_path)
+    assert loaded_text == text + text
+
 
 def _dict_io(directory: UPath, file_type: str) -> None:
     """Do IO of a dictionary against a cloud location."""

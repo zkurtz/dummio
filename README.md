@@ -1,10 +1,6 @@
 # dummio
 
-IO for dummies! We make IO as easy as possible by providing a unified `save`/`load` interface, using the most common and recommendable default options for IO between various object types and file types. (Users may pass additional keyword arguments to the underlying IO methods.)
-
-## Simple IO calls
-
-dummio simplifies IO calls for some file types. For example, instead of
+IO for dummies! A unified `save`/`load` interface using the most common and recommendable default options for IO between various object types and file types. For example, instead of
 ```
 with open(file_path, 'r', encoding='utf-8') as file:
     data = json.load(file)
@@ -13,6 +9,15 @@ you can simply
 ```
 data = dummio.json.load(file_path)
 ```
+
+Users may pass additional keyword arguments to the underlying IO methods.
+
+
+## Direct IO vs cloud paths
+
+Most dummio IO calls "just work" against cloud paths like `s3://bucket/key`, `gs://bucket/key`, or `az://container/key`. For example, `dummio.json.load("s3://bucket/key")` will read a json file from an S3 bucket. Notes:
+- Shout-out: [universal-pathlib](https://github.com/fsspec/universal_pathlib) powers much of the cloud-iteroperability on our backend.
+- Warning: Although we manually run `demo/cloud.py` to ensure basic functionality, current CI unit testing does not cover cloud interactions.
 
 ## Standardized IO interface
 
@@ -32,11 +37,13 @@ So far we support:
 - onnx.ModelProto instances
 - pydantic models (relying on the built-in json serialization methods)
 
-Filepaths passed to `save` and `load` methods can be of type `str`, `pathlib.Path`, or `universal_pathlib.UPath` such that many of these methods will "just work" against cloud paths like `UPath("s3://bucket/key")`, `UPath("gs://bucket/key")`, or `UPath("az://container/key")`.
+Filepaths passed to `save` and `load` methods can be of type `str`, `pathlib.Path`, or `universal_pathlib.UPath`.
 
 ## Dependencies
 
-dummio has no required dependencies. For example, calling `from dummio.pandas import df_parquet` will raise a helpful message to install pandas if you have not already done so.
+[universal-pathlib](https://github.com/fsspec/universal_pathlib) is our only required dependency.
+
+For other dependencies, such as pandas, calling `from dummio.pandas import df_parquet` will raise a helpful message to install pandas if you have not already done so.
 
 ## Examples
 
@@ -56,6 +63,8 @@ assert text == dummio.text.load(path)
 dummio.yaml.save(data)
 assert data == dummio.yaml.load(path)
 ```
+
+See `demo/cloud.py` for more many other examples.
 
 ## Installation
 
