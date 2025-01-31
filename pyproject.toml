@@ -1,6 +1,6 @@
 [project]
 name = "dummio"
-version = "1.6.3"
+version = "1.7.0"
 description = "Easiest-possible IO for basic file types."
 authors = [{ name = "Zach Kurtz", email = "zkurtz@gmail.com" }]
 readme = "README.md"
@@ -25,7 +25,6 @@ dev = [
 extras = [
   "fastparquet>=2024.11.0",
   "pandas>=1.5.0",
-  "pyyaml>=6.0.2",
   "onnx>=1.10.1",
   "pydantic>=2.10.2",
   "dill>=0.2.2",
@@ -36,13 +35,14 @@ extras = [
   "adlfs>=2024.12.0",
   "s3fs>=2024.12.0",
   "pandahandler>=0.3.0",
+  "ruamel-yaml>=0.18.10",
 ]
 
 [tool.uv]
 package = true
 
 [tool.bumpversion]
-current_version = "1.6.3"
+current_version = "1.7.0"
 parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)"
 serialize = ["{major}.{minor}.{patch}"]
 search = "{current_version}"
