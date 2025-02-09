@@ -14,8 +14,12 @@ IO_MODULES = [
     "dummio.pydantic",
     "dummio.text",
     "dummio.yaml",
+    "dummio.mashumaro.json",
+    "dummio.mashumaro.yaml",
     "dummio.pandas.df_csv",
+    "dummio.pandas.df_feather",
     "dummio.pandas.df_parquet",
+    "dummio.pandas.df_io",
 ]
 
 
