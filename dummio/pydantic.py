@@ -1,12 +1,14 @@
 """IO for pydantic models."""
 
-from typing import Type
+from typing import Type, TypeVar
 
 import pydantic
 from upath import UPath
 
 from dummio.constants import PathType
 
+
+T = TypeVar("T", bound=pydantic.BaseModel)
 
 def save(
     data: pydantic.BaseModel,
@@ -21,8 +23,8 @@ def save(
 def load(
     filepath: PathType,
     *,
-    model: Type[pydantic.BaseModel],
-) -> pydantic.BaseModel:
+    model: Type[T],
+) -> T:
     """Load a pydantic model instance from a json text file."""
     data_json_str = UPath(filepath).read_text()
     return model.model_validate_json(data_json_str)
