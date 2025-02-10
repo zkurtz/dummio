@@ -7,8 +7,8 @@ from upath import UPath
 
 from dummio.constants import PathType
 
-
 T = TypeVar("T", bound=pydantic.BaseModel)
+
 
 def save(
     data: pydantic.BaseModel,
