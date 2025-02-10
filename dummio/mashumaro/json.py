@@ -4,12 +4,14 @@ This module supports IO only for a particular simple case of mashumaro dataclass
 `DataClassJSONMixin`. This mixin provides serialization and deserialization methods to and from dictionaries.
 """
 
-from typing import Type
+from typing import Type, TypeVar
 
 from mashumaro.mixins.json import DataClassJSONMixin
 from upath import UPath
 
 from dummio.constants import PathType
+
+T = TypeVar("T", bound=DataClassJSONMixin)
 
 
 def save(
@@ -26,8 +28,8 @@ def save(
 def load(
     filepath: PathType,
     *,
-    model: Type[DataClassJSONMixin],
-) -> DataClassJSONMixin:
+    model: Type[T],
+) -> T:
     """Load a mashumaro dataclass instance from a json text file."""
     json_str = UPath(filepath).read_text()
     return model.from_json(json_str)

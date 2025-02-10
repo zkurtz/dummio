@@ -4,12 +4,14 @@ This module supports IO only for a particular simple case of mashumaro dataclass
 `DataClassYAMLMixin`. This mixin provides serialization and deserialization methods to and from yaml strings.
 """
 
-from typing import Type
+from typing import Type, TypeVar
 
 from mashumaro.mixins.yaml import DataClassYAMLMixin
 from upath import UPath
 
 from dummio.constants import PathType
+
+T = TypeVar("T", bound=DataClassYAMLMixin)
 
 
 def save(
@@ -26,8 +28,8 @@ def save(
 def load(
     filepath: PathType,
     *,
-    model: Type[DataClassYAMLMixin],
-) -> DataClassYAMLMixin:
+    model: Type[T],
+) -> T:
     """Load a mashumaro dataclass instance from a yaml text file."""
     yaml_str = UPath(filepath).read_text()
     return model.from_yaml(yaml_str)
