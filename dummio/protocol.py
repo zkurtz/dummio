@@ -1,7 +1,7 @@
 """Runtime validation of the dummio module protocol."""
 
 from types import ModuleType
-from typing import Callable, get_type_hints
+from typing import Callable, TypeVar, get_type_hints
 
 from dummio.constants import PathType
 
@@ -39,5 +39,8 @@ def assert_module_protocol(module: ModuleType) -> None:
         raise TypeError("First argument of 'load' must be 'filepath'")
     if signature["filepath"] != PathType:
         raise TypeError("'filepath' argument of 'load' must be of type PathType")
-    if signature["return"] != get_type_hints(module.save)["data"]:
-        raise TypeError("Return type of 'load' must match 'data' argument type of 'save'")
+    ret = signature["return"]
+    save_arg = get_type_hints(module.save)["data"]
+    if save_arg != ret:
+        if not isinstance(ret, TypeVar) or (ret.__bound__ != save_arg):
+            raise TypeError("Return type of 'load' must match 'data' argument type of 'save'")
