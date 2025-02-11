@@ -36,6 +36,7 @@ So far we support:
     - parquet
 - onnx.ModelProto instances
 - pydantic models (relying on the built-in json serialization methods)
+- mashumaro models inheriting the json or yaml serialization mixins
 
 Filepaths passed to `save` and `load` methods can be of type `str`, `pathlib.Path`, or `universal_pathlib.UPath`.
 
