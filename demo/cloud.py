@@ -34,6 +34,7 @@ python demo/cloud.py --directory="s3://dummio-demo" --file_type="pydantic"
 python demo/cloud.py --directory="gcs://dummio-demo" --file_type="onnx"
 python demo/cloud.py --directory="gcs://dummio-demo" --file_type="pandas_df"
 python demo/cloud.py --directory="gcs://dummio-demo" --file_type="pandas_df"
+python demo/cloud.py --directory="gcs://dummio-demo" --file_type="numpy"
 python demo/cloud.py --directory="az://dummio/demo" --file_type="pandas_df"
 ```
 """
@@ -163,6 +164,11 @@ def example(directory: str, file_type: str) -> None:
         pydantic.example(filepath=_directory / "pydantic" / "data.json")
     elif file_type == "pandas_df":
         _pandas_df(_directory)
+    elif file_type == "numpy":
+        from dummio.numpy import ndarray_io
+
+        ndarray_io.example(filepath=_directory / "numpy" / "data.npy")
+        ndarray_io.example(filepath=_directory / "numpy" / "weirdfilename")
     else:
         raise ValueError(f"Unrecognized file_type: {file_type}")
 
