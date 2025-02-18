@@ -1,6 +1,6 @@
 [project]
 name = "dummio"
-version = "1.8.2"
+version = "1.9.0"
 description = "Easiest-possible IO for basic file types."
 authors = [{ name = "Zach Kurtz", email = "zkurtz@gmail.com" }]
 readme = "README.md"
@@ -46,7 +46,7 @@ extras = [
 package = true
 
 [tool.bumpversion]
-current_version = "1.8.2"
+current_version = "1.9.0"
 parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)"
 serialize = ["{major}.{minor}.{patch}"]
 search = "{current_version}"

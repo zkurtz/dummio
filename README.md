@@ -34,6 +34,7 @@ So far we support:
     - csv
     - feather
     - parquet
+- numpy arrays (thin wrapper on numpy.save/load)
 - onnx.ModelProto instances
 - pydantic models (relying on the built-in json serialization methods)
 - mashumaro models inheriting the json or yaml serialization mixins
