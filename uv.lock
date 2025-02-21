@@ -584,7 +584,7 @@ wheels = [
 
 [[package]]
 name = "dummio"
-version = "1.8.2"
+version = "1.9.1"
 source = { editable = "." }
 dependencies = [
     { name = "universal-pathlib" },
@@ -607,17 +607,19 @@ dev = [
 extras = [
     { name = "click" },
     { name = "dill" },
-    { name = "fastparquet" },
     { name = "gcsfs" },
     { name = "mashumaro" },
     { name = "onnx" },
-    { name = "pandahandler" },
-    { name = "pandas" },
-    { name = "pyarrow" },
     { name = "pydantic" },
     { name = "pyyaml" },
     { name = "ruamel-yaml" },
     { name = "s3fs" },
+]
+pandas = [
+    { name = "fastparquet" },
+    { name = "pandahandler" },
+    { name = "pandas" },
+    { name = "pyarrow" },
 ]
 
 [package.metadata]
@@ -640,17 +642,19 @@ dev = [
 extras = [
     { name = "click", specifier = ">=8.1.8" },
     { name = "dill", specifier = ">=0.2.2" },
-    { name = "fastparquet", specifier = ">=2024.11.0" },
     { name = "gcsfs", specifier = ">=2024.12.0" },
     { name = "mashumaro", specifier = ">=3.15" },
     { name = "onnx", specifier = ">=1.10.1" },
-    { name = "pandahandler", specifier = ">=0.3.0" },
-    { name = "pandas", specifier = ">=1.5.0" },
-    { name = "pyarrow", specifier = ">=18.1.0" },
     { name = "pydantic", specifier = ">=2.10.2" },
     { name = "pyyaml", specifier = ">=6.0.2" },
     { name = "ruamel-yaml", specifier = ">=0.18.10" },
     { name = "s3fs", specifier = ">=2024.12.0" },
+]
+pandas = [
+    { name = "fastparquet", specifier = ">=2024.11.0" },
+    { name = "pandahandler", specifier = ">=0.5.4" },
+    { name = "pandas", specifier = ">=1.5.0" },
+    { name = "pyarrow", specifier = ">=18.1.0" },
 ]
 
 [[package]]
@@ -1256,7 +1260,7 @@ wheels = [
 
 [[package]]
 name = "pandahandler"
-version = "0.3.0"
+version = "0.5.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs" },
@@ -1264,9 +1268,9 @@ dependencies = [
     { name = "sigfig" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/19/34/e4b6c14c915fc02370278abc65fd0aecb7f078918133322ff38fe7c0ffbf/pandahandler-0.3.0.tar.gz", hash = "sha256:539d971280ba516212522e0ae0e562e3956f3ac72ac98034d8cf0b9235baa2f3", size = 30578 }
+sdist = { url = "https://files.pythonhosted.org/packages/d2/df/f9964be68bbdecb7b6a3cfd2fd38c1e0499602495c1bf3c4eb89e97ee0d0/pandahandler-0.5.4.tar.gz", hash = "sha256:581e033d1d56764fc042bb8141e2a1dd72113083938f3033bc23c0f19e3c12af", size = 45678 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d2/d3/8a436a41cacf629a1c8bf6f255d1d1a0398e941064e9b56bc4f6b993eaf0/pandahandler-0.3.0-py3-none-any.whl", hash = "sha256:f97ef3fa43ac32e840a777db411e3a149be46d0a9b3842d3b3b005047f819707", size = 7264 },
+    { url = "https://files.pythonhosted.org/packages/57/c7/26530f927409b17738f5e037089fc2cedf44c356f6fe62d03934ebd6064b/pandahandler-0.5.4-py3-none-any.whl", hash = "sha256:4febe8fcb838e82546a7130319f11889134f2316ce93bedd5c98df3bb9d9ff11", size = 12248 },
 ]
 
 [[package]]
