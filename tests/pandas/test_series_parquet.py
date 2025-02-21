@@ -24,3 +24,7 @@ def test_io(tmp_path: Path) -> None:
     pd_io.series_parquet.save(data, filepath=path)
     loaded_data = pd_io.series_parquet.load(path)
     pd.testing.assert_series_equal(data, loaded_data)
+
+    # another unnamed series:
+    series = pd.Series([1, 2, 3])
+    pd_io.series_parquet.save(series, filepath=path)
