@@ -30,7 +30,8 @@ def save(
     # in case data.name is None, to_frame (above) imputes df.columns[0] as "0", which is not desired in this context:
     if data.name is None:
         df.columns = [data.name]
-        # ignore "*** UserWarning: The DataFrame has column names of mixed type. They will be converted to strings and not roundtrip correctly."
+        # ignore "*** UserWarning: The DataFrame has column names of mixed type. They will be converted to strings and
+        # not roundtrip correctly."
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", message=".*mixed type.*roundtrip.*")
             df_parquet.save(df, filepath=filepath, **kwargs)
