@@ -28,6 +28,7 @@ Run this script from the repo root like
 python demo/cloud.py --directory="s3://dummio-demo" --file_type="text"
 python demo/cloud.py --directory="s3://dummio-demo" --file_type="yaml"
 python demo/cloud.py --directory="gcs://dummio-demo" --file_type="json"
+python demo/cloud.py --directory="gcs://dummio-demo" --file_type="orjson"
 python demo/cloud.py --directory="s3://dummio-demo" --file_type="pickle"
 python demo/cloud.py --directory="s3://dummio-demo" --file_type="dill"
 python demo/cloud.py --directory="s3://dummio-demo" --file_type="pydantic"
@@ -49,6 +50,7 @@ from dummio.pandas import df_csv, df_feather, df_parquet
 
 USE_DICT = [
     "json",
+    "orjson",
     "yaml",
     "dill",
     "pickle",

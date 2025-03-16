@@ -34,7 +34,6 @@ def _assert_cycle(*, data: Any, path: Path, module: ModuleType) -> None:
 
 
 def test_json(tmp_path: Path) -> None:
-    """Test the packio package."""
     _assert_cycle(
         path=tmp_path / "data.json",
         data=dictionary(),
@@ -42,8 +41,15 @@ def test_json(tmp_path: Path) -> None:
     )
 
 
+def test_orjson(tmp_path: Path) -> None:
+    _assert_cycle(
+        path=tmp_path / "data.json",
+        data=dictionary(),
+        module=dummio.orjson,
+    )
+
+
 def test_text(tmp_path: Path) -> None:
-    """Test the packio package."""
     _assert_cycle(
         path=tmp_path / "data.json",
         data="Hello world!",
@@ -52,7 +58,6 @@ def test_text(tmp_path: Path) -> None:
 
 
 def test_yaml(tmp_path: Path) -> None:
-    """Test the packio package."""
     _assert_cycle(
         path=tmp_path / "data.json",
         data=dictionary(),
@@ -61,7 +66,6 @@ def test_yaml(tmp_path: Path) -> None:
 
 
 def test_pickle(tmp_path: Path) -> None:
-    """Test the packio package."""
     _assert_cycle(
         path=tmp_path / "data.pkl",
         data=dictionary(),
@@ -70,7 +74,6 @@ def test_pickle(tmp_path: Path) -> None:
 
 
 def test_dill(tmp_path: Path) -> None:
-    """Test the packio package."""
     _assert_cycle(
         path=tmp_path / "data.pkl",
         data=dictionary(),

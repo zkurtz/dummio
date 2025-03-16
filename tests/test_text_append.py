@@ -6,7 +6,6 @@ import dummio
 
 
 def test_text_append(tmp_path: Path) -> None:
-    """Test the packio package."""
     data = "Hello world!"
     path = tmp_path / "data.txt"
     dummio.text.save(data, filepath=path)

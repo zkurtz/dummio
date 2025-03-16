@@ -7,7 +7,6 @@ from dummio.pandas import df_parquet
 
 
 def test_io(tmp_path: Path) -> None:
-    """Test the packio package for IO for tabular data."""
     path = tmp_path / "data"
     data = pd.DataFrame({"a": [1, 2], "b": [3, 4]})
     df_parquet.save(data, filepath=path)
