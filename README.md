@@ -12,7 +12,6 @@ data = dummio.json.load(file_path)
 
 Users may pass additional keyword arguments to the underlying IO methods.
 
-
 ## Direct IO vs cloud paths
 
 Most dummio IO calls "just work" against cloud paths like `s3://bucket/key`, `gs://bucket/key`, or `az://container/key`. For example, `dummio.json.load("s3://bucket/key")` will read a json file from an S3 bucket. Notes:
@@ -29,6 +28,7 @@ So far we support:
 - text, pickle, and dill
 - simple dictionaries:
     - json
+    - orjson
     - yaml
 - pandas dataframes:
     - csv

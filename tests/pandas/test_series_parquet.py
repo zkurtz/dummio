@@ -12,7 +12,6 @@ def build_series() -> pd.Series:
 
 
 def test_io(tmp_path: Path) -> None:
-    """Test the packio package for IO for tabular data."""
     path = tmp_path / "data"
     data = build_series()
     pd_io.series_parquet.save(data, filepath=path)

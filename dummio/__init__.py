@@ -30,3 +30,9 @@ try:
 except ImportError:
     # this would require the optional dependency dill
     pass
+
+try:
+    from dummio import orjson as orjson
+except ImportError:
+    # this would require the optional dependency orjson
+    pass
