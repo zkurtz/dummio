@@ -34,7 +34,7 @@ python demo/cloud.py --directory="s3://dummio-demo" --file_type="dill"
 python demo/cloud.py --directory="s3://dummio-demo" --file_type="pydantic"
 python demo/cloud.py --directory="gcs://dummio-demo" --file_type="onnx"
 python demo/cloud.py --directory="gcs://dummio-demo" --file_type="pandas_df"
-python demo/cloud.py --directory="gcs://dummio-demo" --file_type="pandas_df"
+python demo/cloud.py --directory="s3://dummio-demo" --file_type="pandas_df"
 python demo/cloud.py --directory="gcs://dummio-demo" --file_type="numpy"
 python demo/cloud.py --directory="az://dummio/demo" --file_type="pandas_df"
 ```
@@ -112,16 +112,6 @@ def _pandas_df(directory: UPath) -> None:
     csv_path = directory / "dataframes" / "data.csv"
     parquet_path = directory / "dataframes" / "data.parquet"
     feather_path = directory / "dataframes" / "data.feather"
-
-    print("Trying native pandas methods:")
-    df.to_csv(csv_path, index=False)
-    df.to_parquet(parquet_path)
-    df.to_feather(feather_path)
-    assert pd.read_csv(csv_path).equals(df)
-    assert pd.read_parquet(parquet_path).equals(df)
-    assert pd.read_feather(feather_path).equals(df)
-    for univ_path in [csv_path, parquet_path, feather_path]:
-        univ_path.unlink()
 
     print(f"Doing IO of df against {csv_path}")
     df_csv.save(data=df, filepath=csv_path)

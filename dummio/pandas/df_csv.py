@@ -4,9 +4,9 @@ from typing import Any
 
 import pandas as pd
 from pandahandler.indexes import is_unnamed_range_index
+from upath import UPath
 
 from dummio.constants import PathType
-from dummio.pandas.utils import add_storage_options
 
 
 def save(
@@ -15,7 +15,7 @@ def save(
     filepath: PathType,
     **kwargs: Any,
 ) -> None:
-    """Save a parquet file.
+    """Save a csv file.
 
     Args:
         data: Data to save.
@@ -24,16 +24,16 @@ def save(
     """
     if "index" not in kwargs and is_unnamed_range_index(data.index):
         kwargs["index"] = False
-    add_storage_options(filepath=filepath, kwargs=kwargs)
-    data.to_csv(filepath, **kwargs)
+    with UPath(filepath).open("wb") as file:
+        data.to_csv(file, **kwargs)
 
 
 def load(filepath: PathType, **kwargs: Any) -> pd.DataFrame:
-    """Read a parquet file.
+    """Read a csv file.
 
     Args:
         filepath: Path to read the data.
         **kwargs: Additional keyword arguments for pandas.read_csv
     """
-    add_storage_options(filepath=filepath, kwargs=kwargs)
-    return pd.read_csv(filepath, **kwargs)
+    with UPath(filepath).open("rb") as file:
+        return pd.read_csv(file, **kwargs)
