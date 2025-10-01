@@ -3,9 +3,9 @@
 from typing import Any
 
 import pandas as pd
+from upath import UPath
 
 from dummio.constants import PathType
-from dummio.pandas.utils import add_storage_options
 
 ENGINE = "engine"
 PYARROW = "pyarrow"
@@ -28,12 +28,12 @@ def save(
         filepath: Path to save the data.
         **kwargs: Additional keyword arguments for pandas.DataFrame.to_parquet
     """
-    add_storage_options(filepath=filepath, kwargs=kwargs)
     if None in data.columns:
         if ENGINE not in kwargs:
             kwargs[ENGINE] = PYARROW
     try:
-        data.to_parquet(filepath, **kwargs)
+        with UPath(filepath).open("wb") as file:
+            data.to_parquet(file, **kwargs)
     except TypeError as err:
         using_fastparquet = kwargs.get(ENGINE, "") == FASTPARQUET
         none_colname_err = "Column name must be a string" in str(err)
@@ -50,5 +50,5 @@ def load(filepath: PathType, **kwargs: Any) -> pd.DataFrame:
         filepath: Path to read the data.
         **kwargs: Additional keyword arguments for pandas.read_parquet
     """
-    add_storage_options(filepath=filepath, kwargs=kwargs)
-    return pd.read_parquet(filepath, **kwargs)
+    with UPath(filepath).open("rb") as file:
+        return pd.read_parquet(file, **kwargs)
