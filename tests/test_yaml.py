@@ -23,7 +23,7 @@ CONF = dedent("""
 
 
 def _assert_yaml_content(oldpath: PathType, newpath: PathType) -> None:
-    Path(oldpath).write_text(CONF)
+    UPath(oldpath).write_text(CONF)
 
     # Load the config using dummio:
     config = dummio.yaml.load(oldpath)
@@ -38,7 +38,7 @@ def _assert_yaml_content(oldpath: PathType, newpath: PathType) -> None:
     dummio.yaml.save(config, filepath=newpath)
 
     # Load the new config as a string and compare vs the original string:
-    conf_str = Path(newpath).read_text().strip()
+    conf_str = UPath(newpath).read_text().strip()
     assert CONF == conf_str
 
 

@@ -1,12 +1,12 @@
 [project]
 name = "dummio"
-version = "1.10.1"
+version = "1.10.2"
 description = "Easiest-possible IO for basic file types."
 authors = [{ name = "Zach Kurtz", email = "zkurtz@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "universal-pathlib>=0.3.0",
+    "universal-pathlib>=0.3.2",
 ]
 
 [project.urls]
@@ -76,8 +76,6 @@ testpaths = ["tests",]
 
 [tool.pyright]
 include = ["dummio", "tests"]
-# TODO: enable this rule after https://github.com/fsspec/universal_pathlib/issues/413 is fixed
-reportArgumentType = false
 
 [tool.ruff]
 line-length = 120
