@@ -23,13 +23,9 @@ def save(
         filepath: Path to save the data.
         **kwargs: Additional keyword arguments for vortex.io.write
     """
-    # Convert DataFrame to Arrow table
+    # Convert DataFrame to Arrow table and write to file
     table = pa.Table.from_pandas(data)
-    # Convert to Vortex array
-    vortex_array = table
-
-    # Write to file - vortex.io.write requires a string path
-    vortex.io.write(vortex_array, str(filepath), **kwargs)
+    vortex.io.write(table, str(filepath), **kwargs)
 
 
 def load(filepath: PathType, **kwargs: Any) -> pd.DataFrame:
