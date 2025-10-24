@@ -4,6 +4,8 @@ from typing import Any
 
 import pandas as pd
 import pyarrow as pa
+import vortex
+import vortex.io
 
 from dummio.constants import PathType
 
@@ -21,8 +23,6 @@ def save(
         filepath: Path to save the data.
         **kwargs: Additional keyword arguments for vortex.io.write
     """
-    import vortex.io
-
     # Convert DataFrame to Arrow table
     table = pa.Table.from_pandas(data)
     # Convert to Vortex array
@@ -42,8 +42,6 @@ def load(filepath: PathType, **kwargs: Any) -> pd.DataFrame:
     Returns:
         DataFrame: The loaded pandas DataFrame
     """
-    import vortex
-
     # Open the vortex file
     vortex_file = vortex.open(str(filepath))
 
