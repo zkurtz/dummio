@@ -50,7 +50,8 @@ from dummio.constants import PathType
 CSV = "csv"
 FEATHER = "feather"
 PARQUET = "parquet"
-SUPPORTED_FORMATS = [CSV, FEATHER, PARQUET]
+VORTEX = "vortex"
+SUPPORTED_FORMATS = [CSV, FEATHER, PARQUET, VORTEX]
 
 
 @dataclass

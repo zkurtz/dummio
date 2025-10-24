@@ -7,3 +7,9 @@ try:
 except ImportError:
     # this would require the optional dependency pyarrow
     pass
+
+try:
+    from dummio.pandas import df_vortex as df_vortex
+except ImportError:
+    # this would require the optional dependency vortex-data
+    pass
