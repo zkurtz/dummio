@@ -27,7 +27,7 @@ def save(
     table = pa.Table.from_pandas(data)
     # Convert to Vortex array
     vortex_array = table
-    
+
     # Write to file - vortex.io.write requires a string path
     vortex.io.write(vortex_array, str(filepath), **kwargs)
 
@@ -46,9 +46,9 @@ def load(filepath: PathType, **kwargs: Any) -> pd.DataFrame:
 
     # Open the vortex file
     vortex_file = vortex.open(str(filepath))
-    
+
     # Convert to Arrow RecordBatchReader, then to table, then to pandas
     arrow_reader = vortex_file.to_arrow()
     table = arrow_reader.read_all()
-    
+
     return table.to_pandas()

@@ -5,6 +5,15 @@ for .parquet vs .vortex formats.
 
 Run this script from the repo root:
     python demo/vortex_vs_parquet.py
+
+Example results (2025-10-24 on a macbook):
+
+Metric                    Parquet         Vortex          Winner
+-----------------------------------------------------------------
+Save time (s)             2.315           1.731           Vortex     (1.34x)
+Load time (s)             1.599           0.458           Vortex     (3.49x)
+Round-trip time (s)       3.914           2.189           Vortex     (1.79x)
+File size (MB)            296.845         296.380         Vortex     (1.00x)
 """
 
 import tempfile
@@ -131,9 +140,7 @@ def main() -> None:
         )
 
         # Benchmark Vortex
-        vortex_results = benchmark_format(
-            df, tmpdir_path / "test.vortex", df_vortex.save, df_vortex.load, "Vortex"
-        )
+        vortex_results = benchmark_format(df, tmpdir_path / "test.vortex", df_vortex.save, df_vortex.load, "Vortex")
 
     # Print comparison summary
     print(f"\n{'=' * 60}")
@@ -161,9 +168,7 @@ def main() -> None:
             winner = "Vortex"
             speedup = parquet_val / vortex_val
 
-        print(
-            f"{metric_name:<25} {parquet_val:<15.3f} {vortex_val:<15.3f} {winner:<10} ({speedup:.2f}x)"
-        )
+        print(f"{metric_name:<25} {parquet_val:<15.3f} {vortex_val:<15.3f} {winner:<10} ({speedup:.2f}x)")
 
     print("\n" + "=" * 60)
 

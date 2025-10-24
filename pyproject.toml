@@ -4,7 +4,7 @@ version = "1.10.2"
 description = "Easiest-possible IO for basic file types."
 authors = [{ name = "Zach Kurtz", email = "zkurtz@gmail.com" }]
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "universal-pathlib>=0.3.2",
 ]
