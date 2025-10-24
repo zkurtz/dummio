@@ -1,10 +1,13 @@
 """Performance comparison between different file formats for pandas DataFrames.
 
 This demo creates a ~500MB DataFrame and compares the IO cycle round trip time
-for different formats supported by dummio: .csv, .parquet, .feather, and .vortex.
+for different formats supported by dummio: .parquet, .feather, and .vortex.
+
+We exclude CSV from this comparison as it is already well-known not to be a
+competitive format for large DataFrames.
 
 Run this script from the repo root:
-    python demo/vortex_vs_parquet.py
+    python demo/pandas/performance.py
 
 Example results (2025-10-24 on a macbook):
 
@@ -25,29 +28,14 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from dummio.pandas import df_csv, df_parquet
-
-# Try to import optional formats
-try:
-    from dummio.pandas import df_feather
-
-    HAS_FEATHER = True
-except ImportError:
-    HAS_FEATHER = False
-
-try:
-    from dummio.pandas import df_vortex
-
-    HAS_VORTEX = True
-except ImportError:
-    HAS_VORTEX = False
+from dummio.pandas import df_feather, df_parquet, df_vortex
 
 
 def create_large_dataframe(target_size_mb: float = 500) -> pd.DataFrame:
     """Create a DataFrame of approximately the target size in MB.
 
     Args:
-        target_size_mb: Target size in megabytes (default: 300)
+        target_size_mb: Target size in megabytes (default: 500)
 
     Returns:
         A pandas DataFrame of approximately the target size
@@ -156,51 +144,41 @@ def main() -> None:
     with tempfile.TemporaryDirectory() as tmpdir:
         tmpdir_path = Path(tmpdir)
 
-        # Benchmark CSV
-        results.append(benchmark_format(df, tmpdir_path / "test.csv", df_csv.save, df_csv.load, "CSV"))
-
-        # Benchmark Parquet
-        results.append(benchmark_format(df, tmpdir_path / "test.parquet", df_parquet.save, df_parquet.load, "Parquet"))
-
-        # Benchmark Feather (if available)
-        if HAS_FEATHER:
-            results.append(
-                benchmark_format(
-                    df,
-                    tmpdir_path / "test.feather",
-                    df_feather.save,
-                    df_feather.load,
-                    "Feather",  # type: ignore[possibly-undefined]
-                )
+        # Benchmark Parquet (baseline)
+        results.append(
+            benchmark_format(
+                df, tmpdir_path / "test.parquet", df_parquet.save, df_parquet.load, "Parquet"
             )
-        else:
-            print("\n⚠ Feather format skipped (pyarrow not available)")
+        )
 
-        # Benchmark Vortex (if available)
-        if HAS_VORTEX:
-            results.append(
-                benchmark_format(
-                    df,
-                    tmpdir_path / "test.vortex",
-                    df_vortex.save,
-                    df_vortex.load,
-                    "Vortex",  # type: ignore[possibly-undefined]
-                )
+        # Benchmark Feather
+        results.append(
+            benchmark_format(
+                df, tmpdir_path / "test.feather", df_feather.save, df_feather.load, "Feather"
             )
-        else:
-            print("\n⚠ Vortex format skipped (vortex-data not available)")
+        )
+
+        # Benchmark Vortex
+        results.append(
+            benchmark_format(
+                df, tmpdir_path / "test.vortex", df_vortex.save, df_vortex.load, "Vortex"
+            )
+        )
 
     # Print comparison summary
     print(f"\n{'=' * 80}")
-    print("SUMMARY")
+    print("SUMMARY (Parquet is baseline)")
     print(f"{'=' * 80}")
 
-    # Print header
+    # Get baseline (Parquet) results
+    parquet_results = results[0]
     format_names = [r["format"] for r in results]
+
+    # Print header
     header = f"\n{'Metric':<25}"
     for name in format_names:
         header += f" {name:<15}"
-    header += " Winner"
+    header += " Best"
     print(header)
     print("-" * 80)
 
@@ -215,19 +193,37 @@ def main() -> None:
         line = f"{metric_name:<25}"
         values = [r[metric_key] for r in results]
 
-        # Find winner (lowest value)
+        # Find best (lowest value)
         min_val = min(values)
-        winner_idx = values.index(min_val)
-        winner_name = format_names[winner_idx]
+        best_idx = values.index(min_val)
+        best_name = format_names[best_idx]
 
         # Print all values
         for val in values:
             line += f" {val:<15.3f}"
 
-        # Add winner and speedup
+        # Add best format and speedup relative to worst
         max_val = max(values)
         speedup = max_val / min_val if min_val > 0 else 1.0
-        line += f" {winner_name} ({speedup:.2f}x)"
+        line += f" {best_name} ({speedup:.2f}x)"
+
+        print(line)
+
+    # Print speedup relative to Parquet baseline
+    print(f"\n{'=' * 80}")
+    print("Relative to Parquet (baseline = 1.0x)")
+    print(f"{'=' * 80}")
+    print(f"\n{'Metric':<25} {'Parquet':<15} {'Feather':<15} {'Vortex':<15}")
+    print("-" * 80)
+
+    for metric_name, metric_key in metrics:
+        line = f"{metric_name:<25}"
+        parquet_val = parquet_results[metric_key]
+
+        for r in results:
+            val = r[metric_key]
+            relative = val / parquet_val if parquet_val > 0 else 1.0
+            line += f" {relative:<15.2f}"
 
         print(line)
 
