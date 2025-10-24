@@ -1,6 +1,6 @@
 [project]
 name = "dummio"
-version = "1.10.2"
+version = "1.11.0"
 description = "Easiest-possible IO for basic file types."
 authors = [{ name = "Zach Kurtz", email = "zkurtz@gmail.com" }]
 readme = "README.md"
