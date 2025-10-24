@@ -30,12 +30,14 @@ from dummio.pandas import df_csv, df_parquet
 # Try to import optional formats
 try:
     from dummio.pandas import df_feather
+
     HAS_FEATHER = True
 except ImportError:
     HAS_FEATHER = False
 
 try:
     from dummio.pandas import df_vortex
+
     HAS_VORTEX = True
 except ImportError:
     HAS_VORTEX = False
@@ -155,22 +157,20 @@ def main() -> None:
         tmpdir_path = Path(tmpdir)
 
         # Benchmark CSV
-        results.append(
-            benchmark_format(df, tmpdir_path / "test.csv", df_csv.save, df_csv.load, "CSV")
-        )
+        results.append(benchmark_format(df, tmpdir_path / "test.csv", df_csv.save, df_csv.load, "CSV"))
 
         # Benchmark Parquet
-        results.append(
-            benchmark_format(
-                df, tmpdir_path / "test.parquet", df_parquet.save, df_parquet.load, "Parquet"
-            )
-        )
+        results.append(benchmark_format(df, tmpdir_path / "test.parquet", df_parquet.save, df_parquet.load, "Parquet"))
 
         # Benchmark Feather (if available)
         if HAS_FEATHER:
             results.append(
                 benchmark_format(
-                    df, tmpdir_path / "test.feather", df_feather.save, df_feather.load, "Feather"  # type: ignore[possibly-undefined]
+                    df,
+                    tmpdir_path / "test.feather",
+                    df_feather.save,
+                    df_feather.load,
+                    "Feather",  # type: ignore[possibly-undefined]
                 )
             )
         else:
@@ -180,7 +180,11 @@ def main() -> None:
         if HAS_VORTEX:
             results.append(
                 benchmark_format(
-                    df, tmpdir_path / "test.vortex", df_vortex.save, df_vortex.load, "Vortex"  # type: ignore[possibly-undefined]
+                    df,
+                    tmpdir_path / "test.vortex",
+                    df_vortex.save,
+                    df_vortex.load,
+                    "Vortex",  # type: ignore[possibly-undefined]
                 )
             )
         else:
